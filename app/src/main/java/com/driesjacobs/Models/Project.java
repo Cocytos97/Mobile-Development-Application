@@ -15,7 +15,7 @@ public class Project implements IProject{
         this.title = title;
     }
 
-    private void setDescription(String Description){
+    private void setDescription(String description){
         this.description = description;
     }
 

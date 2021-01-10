@@ -43,6 +43,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectH
 
     @Override
     public int getItemCount() {
+
         return projectList.size();
     }
 
@@ -62,12 +63,12 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectH
         }
 
         void setDetails(IProject project){
-            txtTitle.setText(project.getTitle());
-            txtDate.setText(project.getDate().toString());
-            txtDescription.setText(project.getDescription());
+            //txtTitle.setText(project.getTitle());
+            //txtDate.setText(project.getDate().toString());
+            //txtDescription.setText(project.getDescription());
 
             //https://www.journaldev.com/13759/android-picasso-tutorial#:~:text=To%20use%20the%20android%20Picasso,gradle%20file.&text=Android%20Picasso%20comes%20with%20its,Resizing%20and%20Scaling
-            Picasso.with(context).load(project.getImageUrl()).memoryPolicy(MemoryPolicy.NO_STORE).into(image);
+            //Picasso.with(context).load(project.getImageUrl()).memoryPolicy(MemoryPolicy.NO_STORE).into(image);
         }
 
     }
