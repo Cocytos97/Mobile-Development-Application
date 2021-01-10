@@ -32,7 +32,7 @@ public class Project implements IProject, Serializable {
     }
 
     private void setUrl(String url){
-        this.description = url;
+        this.url = url;
     }
 
     private void setAuthor(String author){

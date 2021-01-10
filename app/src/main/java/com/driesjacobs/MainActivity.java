@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         projectList = new ArrayList<>();
         adapter = new ProjectAdapter(this, projectList);
@@ -62,25 +63,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getProjects() throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(JSON_URL).build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                if(response.isSuccessful()){
-                    String jsondata = response.body().string();
-                    ObjectMapper mapper = new ObjectMapper();
-
-                    projectList = mapper.readValue(jsondata, new TypeReference<List<Project>>(){});
-                    adapter.notifyDataSetChanged();
+        try{
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url(JSON_URL).build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    e.printStackTrace();
                 }
-            }
-        });
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    if(response.isSuccessful()){
+                        String jsondata = response.body().string();
+                        ObjectMapper mapper = new ObjectMapper();
+
+                        projectList = mapper.readValue(jsondata, new TypeReference<List<Project>>(){});
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            });
+        }catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+            addDummyData();
+        }
     }
 
     private void addDummyData() {

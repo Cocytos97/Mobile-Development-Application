@@ -6,10 +6,13 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.driesjacobs.Models.IProject;
@@ -47,29 +50,32 @@ public class ProjectDetailActivity extends AppCompatActivity {
         txtTitle.setText(project.getTitle());
         txtAuthor.setText(project.getAuthor());
         txtDate.setText(project.getDate());
-        image.setImageResource(project.getImage());
+
+        Integer imageInt = project.getImage();
+
+        if(imageInt == -1){
+            imageInt = R.drawable.default_image;
+        }
+        image.setImageResource(imageInt);
 
         //setting share button
         shareLayout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, project.getTitle());
-                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, project.getUrl());
-
-                final PackageManager pm = v.getContext().getPackageManager();
-                final List<ResolveInfo> activityList = pm.queryIntentActivities(shareIntent, 0);
-                for (final ResolveInfo app : activityList) {
-                    if ("com.twitter.android.PostActivity".equals(app.activityInfo.name)) {
-                        final ActivityInfo activity = app.activityInfo;
-                        final ComponentName name = new ComponentName(activity.applicationInfo.packageName, activity.name);
-                        shareIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-                        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-                        shareIntent.setComponent(name);
-                        v.getContext().startActivity(shareIntent);
-                        break;
+                try{
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("message/rfc822");
+                    i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"driesjacobs007@gmail.com"});
+                    i.putExtra(Intent.EXTRA_SUBJECT, project.getTitle());
+                    i.putExtra(Intent.EXTRA_TEXT   , project.getUrl());
+                    try {
+                        startActivity(Intent.createChooser(i, "Send mail..."));
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(ProjectDetailActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
                     }
+                }catch (Exception ex){
+                    Log.e("error", ex.getMessage());
                 }
+
             }
         });
     }

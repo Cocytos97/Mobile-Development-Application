@@ -3,6 +3,7 @@ package com.driesjacobs.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.IpPrefix;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,13 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProjectDetailActivity.class);
                 intent.putExtra("project", project);
-                context.startActivity(intent);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                try{
+                    context.startActivity(intent);
+                }catch (Exception ex){
+                    Log.e("test", ex.getMessage());
+                }
+
             }
         });
     }
