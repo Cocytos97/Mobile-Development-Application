@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeecf1"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="397dp">
+
+                <ImageView
+                    android:id="@+id/detailImageViewId"
+                    android:layout_width="match_parent"
+                    android:layout_height="367dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/default_image" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:layout_gravity="bottom"
+                    android:gravity="end">
+
+                    <FrameLayout
+                        android:id="@+id/detailShareViewId"
+                        android:layout_width="64dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorTextPrimary"/>
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/share_button" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="27dp"
+                android:orientation="vertical"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="27dp">
+
+                <TextView
+                    android:id="@+id/detailTitleViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:lineSpacingExtra="14sp"
+                    android:text="@string/title"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="22sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/detailAuthorViewId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/author"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/detailDateViewId"
+                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text= "@string/date"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="18sp"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/detailDescriptionViewId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="22dp"
+                    android:lineSpacingExtra="5sp"
+                    android:text="@string/ur_adipiscing_elit_sed_do_eiusmod_tempor_sed_do_eiusmod_tempor_aliquip_ex_ea_lorem_ipsum_dds_olor_sit_amet_consdafas_ectetur_adipiscing_elit_lorem_ipsum_dds_olor_sit_amet_consectetur_adipiscing_elit"
+                    android:textColor="#202020"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

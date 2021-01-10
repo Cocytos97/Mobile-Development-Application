@@ -8,4 +8,7 @@ public interface IProject {
     String getTitle();
     String getDescription();
     Integer getImage();
+    String getAuthor();
+    String getDate();
+    String getUrl();
 }

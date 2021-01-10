@@ -33,12 +33,19 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.okhttp:okhttp:2.5.0'
 
     //https://developer.android.com/jetpack/androidx/releases/recyclerview
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
     //https://developer.android.com/jetpack/androidx/releases/cardview
     implementation "androidx.cardview:cardview:1.0.0"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.7.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.7.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.7.2'
 
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

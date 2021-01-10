@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Mobile Application</string>
+    <string name="title">Title</string>
+    <string name="date">date</string>
+    <string name="author">author</string>
+    <string name="ur_adipiscing_elit_sed_do_eiusmod_tempor_sed_do_eiusmod_tempor_aliquip_ex_ea_lorem_ipsum_dds_olor_sit_amet_consdafas_ectetur_adipiscing_elit_lorem_ipsum_dds_olor_sit_amet_consectetur_adipiscing_elit">ur adipiscing elit, sed do eiusmod tempor sed do eiusmod tempor aliquip ex ea. Lorem ipsum dds olor sit amet, consdafas ectetur adipiscing elit, Lorem ipsum dds olor sit amet, consectetur adipiscing elit,</string>
 </resources>

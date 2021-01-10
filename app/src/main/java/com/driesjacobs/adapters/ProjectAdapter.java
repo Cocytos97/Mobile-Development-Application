@@ -1,6 +1,7 @@
 package com.driesjacobs.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.IpPrefix;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.driesjacobs.Models.IProject;
+import com.driesjacobs.Models.Project;
+import com.driesjacobs.ProjectDetailActivity;
 import com.driesjacobs.R;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
@@ -22,9 +25,9 @@ import java.util.List;
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
     private Context context;
-    private List<IProject> projectList;
+    private List<Project> projectList;
 
-    public ProjectAdapter(Context context, ArrayList<IProject> projectList){
+    public ProjectAdapter(Context context, ArrayList<Project> projectList){
         this.context = context;
         this.projectList = projectList;
     }
@@ -39,15 +42,22 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final IProject project = projectList.get(position);
+        final Project project = projectList.get(position);
         holder.txtDescription.setText(project.getDescription());
         holder.txtTitle.setText(project.getTitle());
-        holder.image.setImageResource(project.getImage());
+        Integer imageInt = project.getImage();
+
+        if(imageInt == -1){
+            imageInt = R.drawable.default_image;
+        }
+        holder.image.setImageResource(imageInt);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, project.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ProjectDetailActivity.class);
+                intent.putExtra("project", project);
+                context.startActivity(intent);
             }
         });
     }
