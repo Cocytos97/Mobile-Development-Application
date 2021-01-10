@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectHolder> {
+public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
     private Context context;
     private List<IProject> projectList;
 
@@ -30,46 +31,42 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectH
 
     @NonNull
     @Override
-    public ProjectHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.project_custom_item_view, parent,false);
-        return new ProjectHolder(view, context);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.from(context).inflate(R.layout.project_custom_item_view, parent,false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProjectHolder holder, int position) {
-        IProject project = projectList.get(position);
-        holder.setDetails(project);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        final IProject project = projectList.get(position);
+        holder.txtDescription.setText(project.getDescription());
+        holder.txtTitle.setText(project.getTitle());
+        holder.image.setImageResource(project.getImage());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, project.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-
         return projectList.size();
     }
 
-    class ProjectHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView txtTitle, txtDate, txtDescription;
-        private ImageView image;
-        private Context context;
+        TextView txtTitle, txtDescription;
+        ImageView image;
 
-        ProjectHolder(View itemView, Context context){
+        ViewHolder(View itemView){
             super(itemView);
-            txtTitle = itemView.findViewById(R.id.titleViewId);
-            txtDate = itemView.findViewById(R.id.textViewDateId);
-            txtDescription = itemView.findViewById(R.id.textViewDescriptionId);
+            txtTitle = itemView.findViewById(R.id.textTitleId);
+            txtDescription = itemView.findViewById(R.id.textDescriptionId);
             image = itemView.findViewById(R.id.imageViewId);
-            this.context = context;
         }
-
-        void setDetails(IProject project){
-            //txtTitle.setText(project.getTitle());
-            //txtDate.setText(project.getDate().toString());
-            //txtDescription.setText(project.getDescription());
-
-            //https://www.journaldev.com/13759/android-picasso-tutorial#:~:text=To%20use%20the%20android%20Picasso,gradle%20file.&text=Android%20Picasso%20comes%20with%20its,Resizing%20and%20Scaling
-            //Picasso.with(context).load(project.getImageUrl()).memoryPolicy(MemoryPolicy.NO_STORE).into(image);
-        }
-
     }
 }

@@ -6,7 +6,6 @@ import java.util.Date;
 
 public interface IProject {
     String getTitle();
-    Date getDate();
     String getDescription();
-    String getImageUrl();
+    Integer getImage();
 }
